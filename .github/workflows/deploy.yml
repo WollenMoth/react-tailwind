@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
+      url: ${{ github.ref == 'refs/heads/main' && vars.URL || vars.DEV_URL }}
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js latest version
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: 🔨 Build Project
+        run: npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ github.ref == 'refs/heads/main' && secrets.FTP_USERNAME || secrets.FTP_DEV_USERNAME }}
+          password: ${{ github.ref == 'refs/heads/main' && secrets.FTP_PASSWORD || secrets.FTP_DEV_PASSWORD }}
+          local-dir: ./dist/
