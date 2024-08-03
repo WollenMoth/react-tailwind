@@ -1,30 +1,108 @@
-# React + TypeScript + Vite
+# React Tailwind Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una plantilla para el desarrollo de aplicaciones React utilizando TailwindCSS. Incluye configuración para utilizar Tailwind Variants, Font Awesome, React Router y otras herramientas para facilitar el desarrollo y mantener un código limpio y consistente.
 
-Currently, two official plugins are available:
+## Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### TailwindCSS
+TailwindCSS es un framework de CSS utilitario que permite crear interfaces de usuario rápidas y personalizables. Para más información, visita la [documentación oficial de TailwindCSS](https://tailwindcss.com/).
 
-## Expanding the ESLint configuration
+### Tailwind Variants
+Tailwind Variants es una extensión que permite gestionar variantes de estilos de manera más sencilla. Consulta la [documentación oficial de Tailwind Variants](https://www.tailwind-variants.org/docs/introduction) para más detalles.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Font Awesome
+Font Awesome ofrece una amplia variedad de iconos que se pueden integrar fácilmente en proyectos React. Revisa la [documentación de Font Awesome para React](https://docs.fontawesome.com/web/use-with/react/add-icons/) para más información.
 
-- Configure the top-level `parserOptions` property like this:
+### React Router
+React Router es una librería de enrutamiento para React que permite crear aplicaciones de una sola página con navegación dinámica. Más información en la [documentación de React Router](https://reactrouter.com/en/main/start/overview).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Instalación
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Para iniciar con este proyecto, sigue estos pasos:
+
+1. Clona el repositorio:
+    ```bash
+    git clone <URL_DEL_REPOSITORIO>
+    cd <NOMBRE_DEL_PROYECTO>
+    ```
+
+2. Instala las dependencias:
+    ```bash
+    npm install
+    ```
+
+## Scripts del Package.json
+
+Estos son los scripts disponibles en el archivo `package.json`:
+
+- `dev`: Inicia el servidor de desarrollo usando Vite.
+    ```bash
+    npm run dev
+    ```
+- `build`: Compila el proyecto y construye los archivos para producción.
+    ```bash
+    npm run build
+    ```
+- `lint`: Ejecuta ESLint para analizar el código y detectar problemas.
+    ```bash
+    npm run lint
+    ```
+- `format`: Formatea el código utilizando Prettier.
+    ```bash
+    npm run format
+    ```
+- `preview`: Previsualiza la construcción de producción.
+    ```bash
+    npm run preview
+    ```
+
+## Configuración de IntelliSense en VS Code
+
+Para configurar IntelliSense de TailwindCSS en VS Code, sigue estos pasos:
+
+1. Instala la extensión **TailwindCSS IntelliSense** desde el marketplace de VS Code.
+2. Añade la siguiente configuración a tu archivo `settings.json`:
+    ```json
+    {
+      "tailwindCSS.experimental.classRegex": [
+        ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+      ]
+    }
+    ```
+
+El archivo `extensions.json` ya incluye la recomendación para instalar esta extensión automáticamente.
+
+## Configuración de Variables y Secrets en GitHub
+
+Para habilitar el despliegue continuo en las ramas `main` y `develop` en cada push, configura las siguientes variables y secrets en GitHub:
+
+### Variables
+
+- `URL`: URL de la página principal.
+- `DEV_URL`: URL de la página de desarrollo.
+
+### Secrets
+
+- `FTP_SERVER`: URL del servidor FTP.
+- `FTP_USERNAME`: Usuario FTP para la página principal.
+- `FTP_DEV_USERNAME`: Usuario FTP para la página de desarrollo.
+- `FTP_PASSWORD`: Contraseña del usuario FTP principal.
+- `FTP_DEV_PASSWORD`: Contraseña del usuario FTP de desarrollo.
+
+## Contribuyendo
+
+Para contribuir a este proyecto, por favor sigue estos pasos:
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza los cambios y haz commits (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Realiza push de la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Para más detalles, revisa el archivo LICENSE.
+
+---
+
+¡Gracias por utilizar esta plantilla! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue o enviar un pull request.
