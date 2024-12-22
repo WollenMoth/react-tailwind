@@ -95,6 +95,14 @@ Para habilitar el despliegue continuo en las ramas `main` y `develop` en cada pu
 - `FTP_PASSWORD`: Contraseña del usuario FTP principal.
 - `FTP_DEV_PASSWORD`: Contraseña del usuario FTP de desarrollo.
 
+## Uso con Cursor y RepoPrompt
+
+Este proyecto incluye configuración para utilizar Cursor y RepoPrompt. 
+
+Cursor es un editor de código impulsado por inteligencia artificial diseñado para facilitar el desarrollo de software. Ofrece funciones como autocompletado avanzado, generación de código, depuración asistida y refactorización, integrándose con múltiples lenguajes de programación. Para más información, visita la [página oficial de Cursor](https://www.cursor.com/).
+
+RepoPrompt es una aplicación nativa para macOS diseñada para eliminar las fricciones al trabajar con archivos locales, permitiendo generar resúmenes y contextos personalizados de un repositorio de código para luego utilizarlos con los modelos de lenguaje más avanzados. Para más información, visita la [página oficial de RepoPrompt](https://www.repoprompt.com/).
+
 ## Contribuyendo
 
 Para contribuir a este proyecto, por favor sigue estos pasos:

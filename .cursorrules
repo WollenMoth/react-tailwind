@@ -1,0 +1,508 @@
+# Project Instructions
+
+Use specification and guidelines as you build the app.
+
+Write the complete code for every step. Do not get lazy.
+
+Your goal is to completely finish whatever I ask for.
+
+You will see <ai_context> tags in the code. These are context tags that you should use to help you understand the codebase.
+
+## Overview
+
+This is a web app template.
+
+## Tech Stack
+
+- Frontend: React (with Vite), Tailwind, Tailwind Variants, Shadcn, Lucide React, Motion, React Router
+- Backend: Postgres, Django, DRF, Celery, Pytest, Locust
+- Auth: Djoser, DRF Simple JWT
+- Payments: Stripe
+- Analytics: Sentry
+- Deployment: Vercel
+
+## Project Structure
+
+### Frontend
+
+- `.github` - GitHub actions
+- `public` - Static assets
+- `src` - Source code
+  - `assets` - Assets
+  - `components` - Shared components
+    - `ui` - UI components
+    - `utilities` - Utility components
+    - `Layout.tsx` - Layout component
+    - `routes.tsx` - Routes
+  - `lib` - Library code
+    - `utils` - Utility functions
+  - `hooks` - Custom hooks
+  - `services` - Services
+  - `types` - Type definitions
+
+### Backend
+
+- `.github` - GitHub actions
+- `core` - Project specific app, used to avoid coupling between apps
+- `base` - Base app named the same as the root folder
+  - `settings` - Settings folder
+    - `common.py` - Common settings
+    - `dev.py` - Development settings
+    - `prod.py` - Production settings
+  - `urls.py` - URL configuration
+- `app` - An example app
+  - `management/commands` - Custom management commands
+  - `migrations` - Migrations
+  - `signals` - Signals
+    - `handlers.py` - Signal handlers
+  - `tests` - Tests
+    - `conftest.py` - Pytest configuration
+    - `test_example.py` - Example test
+  - `admin.py` - Admin configuration
+  - `apps.py` - App configuration
+  - `filters.py` - Filters
+  - `forms.py` - Forms
+  - `inlines.py` - Inlines 
+  - `models.py` - Models
+  - `pagination.py` - Pagination
+  - `permissions.py` - Permissions
+  - `serializers.py` - Serializers
+  - `tasks.py` - Celery tasks
+  - `urls.py` - URL configuration
+  - `validators.py` - Validators
+  - `views.py` - Views
+- `locustfiles` - Locust files
+
+## Rules
+
+Follow these rules when building the app.
+
+### Frontend Rules
+
+Follow these rules when working on the frontend.
+
+It uses React (with Vite), Tailwind, Tailwind Variants, Shadcn, Motion and React Router
+
+#### General Rules
+
+- Use `@` to import anything from the app unless otherwise specified
+- Use PascalCase for page folders and component files, and camelCase for everything else
+- Don't update shadcn components unless otherwise specified
+- Use `lucide-react` for icons
+
+#### Env Rules
+
+- If you update environment variables, update the `.env.example` file
+- All environment variables should go in `.env.local`
+- Do not expose environment variables to the frontend
+- Use `VITE_` prefix for environment variables that need to be accessed from the frontend
+- You may import environment variables in components by using `import.meta.env.VARIABLE_NAME`
+
+#### Components
+
+- Separate the main parts of a component's html with an extra blank line for visual spacing
+
+##### Organization
+
+- All components be named using pascal case like `ExampleComponent.tsx` unless otherwise specified
+- Put components in `/components` from the root if shared components
+
+##### Data Fetching
+
+- Use `httpService` `create` method to create other services
+- Use `useData` hook to create other hooks using the corresponding service, request config and dependencies
+- Rename `data` property to the corresponding name of the data being fetched
+- Use properties `isLoading` and `error` to handle loading states and display errors
+
+##### Component
+
+- Use slots to separate the styles of multiple parts of a component
+- To use slots, destruct the slots from the `styles` function and use it by calling the `slot()` as the value of the `className` property
+- Use variants to create multiple versions of the same component
+- Variant values should be passed as props and can be passed to the `styles` function
+- You can pass the `className` prop of the component to the `styles` function to add additional classes to the component
+
+Example of a component:
+
+```tsx
+import { tv, VariantProps } from 'tailwind-variants'
+
+const styles = tv({
+  base: // Base styles of the component
+  slots: {
+    slotName: '...' // Corresponding tailwind classes
+    // Add more slots here
+  },
+  variants: {
+    variantName: {
+      slotName: {
+        variantValue: '...' // Corresponding tailwind classes
+        // Add more variant values here
+      },
+      // Add more slots that will be affected by the variant here
+    },
+    // Add more variants here
+  },
+})
+
+interface Props extends VariantProps<typeof styles> {
+  // Your props here
+}
+
+const Component: React.FC<Props> = ({ /* destructure props */ }) => {
+  const { /* destructure slots */ } = styles({ /* variants */ })
+
+  return (
+    // Your JSX here
+  )
+}
+
+export default Component
+```
+
+##### Type Rules
+
+Follow these rules when working with types.
+
+- When importing types, use `@/types`
+- Name files like `exampleTypes.ts`
+- All types should go in `types`
+- Make sure to export the types in `types/index.ts`
+- Prefer interfaces over type aliases
+
+An example of a type:
+
+`types/actionsTypes.ts`
+
+```ts
+export type ActionState<T> =
+  | { isSuccess: true; message: string; data: T }
+  | { isSuccess: false; message: string; data?: never }
+```
+
+And exporting it:
+
+`types/index.ts`
+
+```ts
+export * from "./actionsTypes"
+```
+
+##### Service Rules
+
+Follow these rules when working with services.
+
+- When importing services, use `@/services`
+- Name files like `exampleService.ts`
+- All services should go in `services`
+- Make sure to export the services in `services/index.ts`
+
+Example of a service:
+
+`services/genreService.ts`
+
+```tsx
+import { Genre } from "@/types";
+import create from "./httpService";
+
+export default create<Genre>("/endpoint");
+```
+
+And exporting it:
+
+`services/index.ts`
+
+```ts
+export { default as genreService } from "./genreService";
+```
+
+##### Hook Rules
+
+Follow these rules when working with hooks.
+
+- When importing hooks, use `@/hooks`
+- Name files like `exampleHook.ts`
+- All hooks should go in `hooks`
+- Make sure to export the hooks in `hooks/index.ts`
+- Use the corresponding `Query` object to 
+
+Example of a hook:
+
+`hooks/useGenre.ts`
+
+```tsx
+import { Query } from "@/components/ExampleComponent";
+import { useData } from "@/hooks";
+import { genreService } from "@/services";
+
+const useGenre = (query: Query) =>
+  useData(
+    genreService,
+    {
+      params: {
+        ordering: query.ordering?.value,
+        search: query.search,
+      },
+    },
+    [query]
+  );
+
+export default useGenre;
+```
+
+### Backend Rules
+
+Follow these rules when working on the backend.
+
+It uses Postgres, Django, DRF, Celery, Pytest and Locust
+
+#### General Rules
+
+- Never generate migrations. You do not have to do anything in the `**/migrations` folder including migrations and metadata. Ignore it.
+
+#### Organization
+
+#### Env Rules
+
+- If you update environment variables, update the `.env.example` file
+- All environment variables should go in `.env`
+- Use `environs` library to parse environment variables
+
+Example of an environment variable:
+
+`app/settings/prod.py`
+
+```py
+from environs import Env
+
+env = Env()
+env.read_env()
+
+# SECRET_KEY is required
+SECRET_KEY = env.str("SECRET_KEY")
+
+# Parse database URLs, e.g.  "postgres://localhost:5432/mydb"
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+
+# Parse email URLs, e.g. "smtp://"
+email = env.dj_email_url("EMAIL_URL", default="smtp://")
+EMAIL_HOST = email["EMAIL_HOST"]
+EMAIL_PORT = email["EMAIL_PORT"]
+EMAIL_HOST_PASSWORD = email["EMAIL_HOST_PASSWORD"]
+EMAIL_HOST_USER = email["EMAIL_HOST_USER"]
+EMAIL_USE_TLS = email["EMAIL_USE_TLS"]
+
+# Parse cache URLS, e.g "redis://localhost:6379/0"
+CACHES = {"default": env.dj_cache_url("CACHE_URL")}
+```
+
+#### Models
+
+- When importing models, use `import models` and use `models.ModelName` to access the model
+- Make sure to cascade delete when necessary
+- Use choices for fields that have a limited set of possible values such as:
+
+```py
+from django.db import models
+
+class Customer(models.Model):
+    MEMBERSHIP_BRONZE = "B"
+    MEMBERSHIP_SILVER = "S"
+    MEMBERSHIP_GOLD = "G"
+
+    MEMBERSHIP_CHOICES = [
+        (MEMBERSHIP_BRONZE, "Bronze"),
+        (MEMBERSHIP_SILVER, "Silver"),
+        (MEMBERSHIP_GOLD, "Gold"),
+    ]
+    membership = models.CharField(
+        max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE
+    )
+    # Other fields
+```
+
+Example of a models:
+
+`app/models.py`
+
+```py
+from django.core.validators import MinValueValidator
+from django.db import models
+
+class Product(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField()
+    description = models.TextField(blank=True)
+    unit_price = models.DecimalField(
+        max_digits=6, decimal_places=2, validators=[MinValueValidator(1)]
+    )
+    inventory = models.IntegerField(validators=[MinValueValidator(0)])
+    last_update = models.DateTimeField(auto_now=True)
+    collection = models.ForeignKey(
+        Collection, on_delete=models.PROTECT, related_name="products"
+    )
+    promotions = models.ManyToManyField(Promotion, blank=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        ordering = ["title"]
+```
+
+#### Model Admins
+
+- Use `@admin.register` decorator to register models
+- Use `@admin.display` decorator to display custom fields
+- Use `@admin.action` decorator to create custom actions
+
+Example of a model admin:
+
+`app/admin.py`
+
+```py
+from django.contrib import admin
+
+from . import models
+from .filters import InventoryFilter
+from .inlines import ProductImageInline
+
+@admin.register(models.Product)
+class ProductAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["collection"]
+    prepopulated_fields = {"slug": ["title"]}
+    actions = ["clear_inventory"]
+    inlines = [ProductImageInline]
+    list_display = ["title", "unit_price", "inventory_status", "collection_title"]
+    list_editable = ["unit_price"]
+    list_filter = ["collection", "last_update", InventoryFilter]
+    list_per_page = 10
+    list_select_related = ["collection"]
+    search_fields = ["title"]
+
+    def collection_title(self, product):
+        return product.collection.title
+
+    @admin.display(ordering="inventory")
+    def inventory_status(self, product):
+        if product.inventory < 10:
+            return "Low"
+        return "OK"
+
+    @admin.action(description="Clear inventory")
+    def clear_inventory(self, request, queryset):
+        updated_count = queryset.update(inventory=0)
+        self.message_user(
+            request,
+            f"{updated_count} products were successfully updated.",
+            messages.ERROR,
+        )
+```
+
+#### Serializers
+
+- Use `model` attribute to specify the model using `models.ModelName`
+- Use `fields` attribute to specify the fields to be serialized
+
+Example of a serializer:
+
+`app/serializers.py`
+
+```py
+from decimal import Decimal
+
+from rest_framework import serializers
+
+from . import models
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    # ProductImageSerializer implementation
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Product
+        fields = [
+            "id",
+            "title",
+            "description",
+            "slug",
+            "inventory",
+            "unit_price",
+            "price_with_tax",
+            "collection",
+            "images",
+        ]
+
+    price_with_tax = serializers.SerializerMethodField(method_name="calculate_tax")
+
+    def calculate_tax(self, product: Product):
+        return product.unit_price * Decimal(1.1)
+```
+
+#### Views
+
+Example of a view:
+
+`app/views.py`
+
+```py
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from . import filters, models, serializers
+from .pagination import DefaultPagination
+from .permissions import IsAdminOrReadOnly
+
+class ProductViewSet(ModelViewSet):
+    queryset = models.Product.objects.prefetch_related("images").all()
+    serializer_class = serializers.ProductSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = filters.ProductFilter
+    pagination_class = DefaultPagination
+    permission_classes = [IsAdminOrReadOnly]
+    search_fields = ["title", "description"]
+    ordering_fields = ["unit_price", "last_update"]
+
+    def get_serializer_context(self):
+        return {"request": self.request}
+
+    def destroy(self, request, *args, **kwargs):
+        if models.OrderItem.objects.filter(product_id=kwargs["pk"]).count() > 0:
+            return Response(
+                {
+                    "error": "Product cannot be deleted because it is associated with an order item."
+                },
+                status=status.HTTP_405_METHOD_NOT_ALLOWED,
+            )
+
+        return super().destroy(request, *args, **kwargs)
+```
+
+### Auth Rules
+
+Follow these rules when working on auth.
+
+It uses Djoser and DRF Simple JWT
+
+#### General Rules
+
+- Use `auth/jwt/create` to create a JWT token
+- Use `auth/jwt/refresh` to refresh a JWT token
+- Use `auth/jwt/verify` to verify a JWT token
+
+### Payments Rules
+
+Follow these rules when working on payments.
+
+It uses Stripe for payments.
+
+### Analytics Rules
+
+Follow these rules when working on analytics.
+
+It uses Sentry for analytics.
