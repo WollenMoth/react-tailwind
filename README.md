@@ -1,6 +1,6 @@
 # React Tailwind Template
 
-Este proyecto es una plantilla para el desarrollo de aplicaciones React utilizando TailwindCSS. Incluye configuración para utilizar Tailwind Variants, Shadcn, Lucide React, React Router y otras herramientas para facilitar el desarrollo y mantener un código limpio y consistente.
+Este proyecto es una plantilla para el desarrollo de aplicaciones React utilizando TailwindCSS. Incluye configuración para utilizar Tailwind Variants, Shadcn, Lucide React, Motion, React Router y otras herramientas para facilitar el desarrollo y mantener un código limpio y consistente.
 
 ## Tecnologías Utilizadas
 
@@ -15,6 +15,9 @@ Colección de componentes bellamente diseñados que puedes copiar y pegar en tus
 
 ### Lucide React
 Lucide React es una librería de iconos SVG que puedes utilizar en tus aplicaciones React. Para más información, visita la [página oficial de Lucide React](https://lucide.dev/).
+
+### Motion
+Motion es una librería de animaciones para React que permite crear transiciones y animaciones de manera sencilla. Para más información, visita la [documentación oficial de Motion](https://motion.dev/docs).
 
 ### React Router
 React Router es una librería de enrutamiento para React que permite crear aplicaciones de una sola página con navegación dinámica. Más información en la [documentación de React Router](https://reactrouter.com/en/main/start/overview).
