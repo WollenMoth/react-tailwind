@@ -1,6 +1,6 @@
 # React Tailwind Template
 
-Este proyecto es una plantilla para el desarrollo de aplicaciones React utilizando TailwindCSS. Incluye configuración para utilizar Tailwind Variants, Font Awesome, React Router y otras herramientas para facilitar el desarrollo y mantener un código limpio y consistente.
+Este proyecto es una plantilla para el desarrollo de aplicaciones React utilizando TailwindCSS. Incluye configuración para utilizar Tailwind Variants, Shadcn, Lucide React, React Router y otras herramientas para facilitar el desarrollo y mantener un código limpio y consistente.
 
 ## Tecnologías Utilizadas
 
@@ -10,8 +10,11 @@ TailwindCSS es un framework de CSS utilitario que permite crear interfaces de us
 ### Tailwind Variants
 Tailwind Variants es una extensión que permite gestionar variantes de estilos de manera más sencilla. Consulta la [documentación oficial de Tailwind Variants](https://www.tailwind-variants.org/docs/introduction) para más detalles.
 
-### Font Awesome
-Font Awesome ofrece una amplia variedad de iconos que se pueden integrar fácilmente en proyectos React. Revisa la [documentación de Font Awesome para React](https://docs.fontawesome.com/web/use-with/react/add-icons/) para más información.
+### Shadcn
+Colección de componentes bellamente diseñados que puedes copiar y pegar en tus aplicaciones. Accesibles. Personalizables. Código abierto. Más información en la [página oficial de Shadcn](https://ui.shadcn.com/).
+
+### Lucide React
+Lucide React es una librería de iconos SVG que puedes utilizar en tus aplicaciones React. Para más información, visita la [página oficial de Lucide React](https://lucide.dev/).
 
 ### React Router
 React Router es una librería de enrutamiento para React que permite crear aplicaciones de una sola página con navegación dinámica. Más información en la [documentación de React Router](https://reactrouter.com/en/main/start/overview).
